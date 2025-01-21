@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Quick Start - Leaflet</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+</head>
+<body>
+<div id="map" style="width: 600px; height: 400px;"></div>
+<script>
+	const map = L.map('map').setView([47.89, 13.007], 12);
+	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: ''
+	}).addTo(map);
+
+	const revierZ = L.polygon([
+	[47.886795, 13.000946],
+	[47.889471, 13.002706],
+	[47.890665, 13.005645],
+    [47.891658, 13.005495],
+    [47.892622, 13.006289],
+    [47.893456, 13.006761],
+    [47.894435, 13.008392],
+    [47.894161, 13.009486],
+    [47.894219, 13.01337],
+    [47.893183, 13.012447],
+    [47.893615, 13.014915],
+    [47.893399, 13.017576],
+    [47.893054, 13.018756],
+    [47.893687, 13.019443],
+    [47.8956, 13.022983],
+    [47.896219, 13.02485],
+    [47.896219, 13.026652],
+    [47.897744, 13.027618],
+    [47.897024, 13.029034],
+    [47.895327, 13.030429],
+    [47.893298, 13.029463],
+    [47.892377, 13.027403],
+    [47.889514, 13.024743],
+    [47.888147, 13.02249],
+    [47.886895, 13.023326],
+    [47.886579, 13.022897],
+    [47.886665, 13.022168],
+    [47.886133, 13.021631],
+    [47.885471, 13.018413],
+    [47.882218, 13.015194],
+    [47.88101, 13.011889],
+    [47.881182, 13.009915],
+    [47.880261, 13.00365]
+	]).addTo(map).bindPopup('Revier Z');
+
+	const revierN = L.polygon([
+	[47.886795, 13.000946],
+	[47.889471, 13.002706],
+	[47.890665, 13.005645],
+    [47.891658, 13.005495],
+    [47.892622, 13.006289],
+    [47.893456, 13.006761],
+    [47.894435, 13.008392],
+    [47.894161, 13.009486],
+    [47.894219, 13.01337],
+    [47.893183, 13.012447],
+    [47.893615, 13.014915],
+    [47.893399, 13.017576],
+    [47.893054, 13.018756],
+    [47.893687, 13.019443],
+    [47.896334, 13.019636],
+    [47.897499, 13.019185],
+    [47.897614, 13.019228],
+    [47.899154, 13.020666],
+    [47.901513, 13.023691],
+    [47.901513, 13.022254],
+    [47.904361, 13.024549]
+	]).setStyle({fillColor: '#FF0000', color: '#FF0000'}).addTo(map).bindPopup('Revier Niedermüller');
+
+	const popup = L.popup()
+		.setLatLng([47.88, 12.95])
+		.setContent('Anthering 12.1')
+		.openOn(map);
+
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent(`You clicked the map at ${e.latlng.toString()}`)
+			.openOn(map);
+	}
+
+	map.on('click', onMapClick);
+</script>
+</body>
+</html>
